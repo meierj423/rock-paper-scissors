@@ -7,12 +7,13 @@
   </head>
   <body>
     <script type="text/javascript">
-      let attempt = 0;
       let wins = 0;
       let losses = 0;
+      let ties = 0;
 
       computerChoices = ["r", "p", "s"];
 
+      //Randomizes the computer's choice
       function shuffle(array) {
         var currentIndex = array.length,
           temporaryValue,
@@ -33,8 +34,40 @@
         return array;
       }
 
-      shuffle(computerChoices);
-      console.log(computerChoices);
+      for (let i = 0; i < 10; i++) {
+        shuffle(computerChoices);
+        let userChoice = prompt("Enter r, p, or s");
+        userChoice = userChoice.toLowerCase();
+        if (userChoice === "r" || userChoice === "s" || userChoice === "p") {
+          if (
+            (userChoice === "r" && computerChoices[0] === "s") ||
+            (userChoice === "s" && computerChoices[0] === "p") ||
+            (userChoice === "p" && computerChoices[0] === "r")
+          ) {
+            wins++;
+            alert(`The computer chose ${computerChoices[0]}`);
+            alert("You've won " + wins + " time(s)!");
+          } else if (userChoice === computerChoices[0]) {
+            ties++;
+            alert(`The computer chose ${computerChoices[0]}`);
+            alert("You've tied " + ties + " time(s).");
+          } else {
+            losses++;
+            alert(`The computer chose ${computerChoices[0]}`);
+            alert("You've lost " + losses + " time(s).");
+          }
+        } else {
+          alert("Please enter either r, s, or p");
+        }
+      }
+      alert(
+        "Total wins: " +
+          wins +
+          "\nTotal ties: " +
+          ties +
+          "\nTotal losses: " +
+          losses
+      );
     </script>
   </body>
 </html>
